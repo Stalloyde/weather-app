@@ -1,7 +1,7 @@
 {
-  "name": "webpack-demo",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "A template for my preferred webpack set up. New projects can start here",
+  "description": "Search a location to check it's weather",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -44,10 +44,10 @@
   "main": "webpack.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stalloyde/webpack-template.git"
+    "url": "https://github.com/Stalloyde/weather-app"
   },
   "bugs": {
-    "url": "https://github.com/Stalloyde/webpack-template/issues"
+    "url": "https://github.com/Stalloyde/weather-app/issues"
   },
-  "homepage": "https://github.com/Stalloyde/webpack-template#readme"
+  "homepage": "https://github.com/Stalloyde/weather-app#readme"
 }
