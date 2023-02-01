@@ -7,11 +7,11 @@ export default async function fetchGeolocationData(city) {
       `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=d9e258234d52a07f51639a2e63abcc0f`,
       { mode: 'cors' }
     );
-
     const geoLocation = await geoLocationResponse.json();
+
     return geoLocation;
-  } catch {
-    console.log('ERROR: Something went wrong with your API call');
+  } catch (error) {
+    console.log(error);
   }
 }
 

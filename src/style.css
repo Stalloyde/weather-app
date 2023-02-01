@@ -1,3 +1,21 @@
-.test {
-  color: rgb(173, 173, 173);
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.search-container {
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+.city-options:hover {
+  cursor: pointer;
+}
+
+input {
+  padding: 5px;
 }
