@@ -4,20 +4,25 @@ import './style.css';
 
 const searchContainer = document.querySelector('.search-container');
 const searchInput = document.getElementById('search-input');
-const searchError = document.querySelector('.search-error');
+const searchResult = document.querySelector('.search-result');
 const form = document.querySelector('form');
+const backgroundImage = document.querySelector('.bg');
+
+backgroundImage.classList.add('sunny');
 
 async function appendGeoLocationData() {
   try {
     const data = await fetchGeolocationData(searchInput.value);
     if (data.length === 0) {
-      searchError.textContent =
-        'Your search does not match any city. Please try again.';
+      const div = document.createElement('div');
+      div.className = 'search-empty';
+      searchResult.appendChild(div);
+      div.textContent = 'Your search does not match any city.';
     }
     data.forEach((city) => {
       const div = document.createElement('div');
       div.className = 'city-options';
-      searchContainer.appendChild(div);
+      searchResult.appendChild(div);
       div.textContent = `${city.name}, ${city.country}`;
     });
   } catch (error) {
@@ -28,7 +33,7 @@ async function appendGeoLocationData() {
 function clear() {
   const cityOptions = document.querySelectorAll('.city-options');
   searchInput.value = '';
-  searchError.textContent = '';
+  searchResult.textContent = '';
   cityOptions.forEach((div) => div.remove());
 }
 

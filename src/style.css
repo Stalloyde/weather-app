@@ -2,20 +2,107 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  font-size: large;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.cloudy {
+  background-image: url('./images/cloudy.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.stormy {
+  background-image: url('./images/stormy.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.rainy {
+  background-image: url('./images/rainy.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sunny {
+  background-image: url('./images/sunny.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .search-container {
-  margin: 10px;
-  padding: 10px;
   display: grid;
+  padding: 30px 10px;
   justify-content: center;
   gap: 10px;
 }
 
-.city-options:hover {
-  cursor: pointer;
+form {
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
 }
 
-input {
+.search-result {
+  margin: auto auto;
+  background-color: aliceblue;
+  border-radius: 15px;
+  opacity: 0.8;
+}
+
+.city-options {
+  width: 280px;
+  padding: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.city-options:hover {
+  cursor: pointer;
+  background-color: rgb(193, 196, 197);
+  border-radius: 15px;
+  text-overflow: unset;
+  white-space: normal;
+}
+
+.search-empty {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+input[type='text'] {
+  border-radius: 15px;
+  height: 50px;
+  width: 300px;
   padding: 5px;
+}
+
+input[type='text']:focus,
+input[type='text']:hover {
+  transform: scale(1.05);
+}
+
+input[type='image'] {
+  position: absolute;
+  width: 8%;
+  height: 70%;
+  right: 15%;
 }
