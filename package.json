@@ -40,7 +40,4 @@
     "url": "https://github.com/Stalloyde/weather-app/issues"
   },
   "homepage": "https://github.com/Stalloyde/weather-app#readme",
-  "dependencies": {
-    "date-fns": "^2.29.3"
-  }
 }
