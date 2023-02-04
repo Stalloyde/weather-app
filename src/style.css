@@ -11,6 +11,13 @@ html {
   margin: 0;
 }
 
+.bg {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 10fr;
+  grid-row: 1/4;
+}
+
 .cloudy {
   background-image: url('./images/cloudy.jpg');
   height: 100%;
@@ -19,8 +26,8 @@ html {
   background-size: cover;
 }
 
-.stormy {
-  background-image: url('./images/stormy.jpg');
+.snowy {
+  background-image: url('./images/snowy.jpg');
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -37,7 +44,7 @@ html {
 
 .sunny {
   background-image: url('./images/sunny.jpg');
-  height: 100%;
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -45,14 +52,15 @@ html {
 
 .search-container {
   display: grid;
-  padding: 30px 10px;
-  justify-content: center;
-  gap: 10px;
+  grid-template-rows: 100px min-content;
+  justify-content: left;
+  margin-left: 3%;
+  grid-column: 1/4;
 }
 
 form {
   display: flex;
-  width: 400px;
+  width: 100%;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -67,7 +75,7 @@ form {
 }
 
 .city-options {
-  width: 280px;
+  width: 100%;
   padding: 10px;
   white-space: nowrap;
   overflow: hidden;
@@ -91,7 +99,7 @@ form {
 input[type='text'] {
   border-radius: 15px;
   height: 50px;
-  width: 300px;
+  width: 40vh;
   padding: 5px;
 }
 
@@ -102,7 +110,32 @@ input[type='text']:hover {
 
 input[type='image'] {
   position: absolute;
-  width: 8%;
-  height: 70%;
-  right: 15%;
+  width: 10%;
+  height: 35%;
+  right: 3%;
+}
+
+.weather-container {
+  display: grid;
+  grid-row: 2/4;
+  grid-column: 2/4;
+  grid-template-rows: 0.5fr 1fr 0.5fr;
+  margin: auto 10%;
+}
+
+.country {
+  padding: 10px;
+  font-size: 4vw;
+  text-align: left;
+}
+
+.temperature {
+  padding: 10px;
+  font-size: 7vw;
+  font-weight: bolder;
+}
+
+.weather {
+  padding: 10px;
+  font-size: 3vw;
 }
