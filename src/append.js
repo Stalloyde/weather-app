@@ -52,17 +52,15 @@ const unitCheck = document.getElementById('unit-check');
 
 function appendUnitConvert() {
   if (fahrenheitCheck === false) {
-    fahrenheitCheck = true;
     unitCheck.textContent = 'Change to °C';
-    currentTemperature.textContent = `${unitConvert.fahrenheitToCelsius(
-      weatherData.currentTemperature
-    )} °F`;
-  } else if (fahrenheitCheck === true) {
-    fahrenheitCheck = false;
-    unitCheck.textContent = 'Change to °F';
     currentTemperature.textContent = `${unitConvert.celsiusToFahrenheit(
       weatherData.currentTemperature
-    )} °C`;
+    )} °F`;
+    fahrenheitCheck = true;
+  } else if (fahrenheitCheck === true) {
+    unitCheck.textContent = 'Change to °F';
+    currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+    fahrenheitCheck = false;
   }
 }
 
