@@ -1,6 +1,7 @@
 import { indexOf } from 'lodash';
 import fetch from './fetch';
 import index from './index';
+import unitConvert from './unitConvert';
 
 const searchInput = document.getElementById('search-input');
 const searchResult = document.querySelector('.search-result');
@@ -8,8 +9,6 @@ const country = document.querySelector('.country');
 const currentTemperature = document.querySelector('.temperature');
 const currentWeather = document.querySelector('.weather');
 const backgroundImage = document.querySelector('.bg');
-
-let searchList;
 
 function closeResults(div) {
   window.addEventListener('click', () => {
@@ -46,12 +45,42 @@ function changeBgImage(weather) {
   }
 }
 
+let searchList;
+let weatherData;
+let fahrenheitCheck = false;
+const unitCheck = document.getElementById('unit-check');
+
+function appendUnitConvert() {
+  if (fahrenheitCheck === false) {
+    fahrenheitCheck = true;
+    unitCheck.textContent = 'Change to °C';
+    currentTemperature.textContent = `${unitConvert.fahrenheitToCelsius(
+      weatherData.currentTemperature
+    )} °F`;
+  } else if (fahrenheitCheck === true) {
+    fahrenheitCheck = false;
+    unitCheck.textContent = 'Change to °F';
+    currentTemperature.textContent = `${unitConvert.celsiusToFahrenheit(
+      weatherData.currentTemperature
+    )} °C`;
+  }
+}
+
+unitCheck.addEventListener('click', appendUnitConvert);
+
 async function appendCityWeather(e) {
+  unitCheck.style.visibility = 'visible';
   const selectCityIndex = e.target.getAttribute('index');
   const selectedCity = searchList[selectCityIndex];
   const latitude = selectedCity.lat;
   const longitude = selectedCity.lon;
-  const weatherData = await fetch.fetchCityWeather(latitude, longitude);
+  if (fahrenheitCheck === true) {
+    weatherData = await fetch.fetchCityWeatherFahrenheit(latitude, longitude);
+    currentTemperature.textContent = `${weatherData.currentTemperature} °F`;
+  } else {
+    weatherData = await fetch.fetchCityWeatherCelsius(latitude, longitude);
+    currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+  }
 
   if (selectedCity.state === undefined) {
     country.textContent = `${selectedCity.name}, ${selectedCity.country}`;
@@ -59,9 +88,8 @@ async function appendCityWeather(e) {
     country.textContent = `${selectedCity.name}, ${selectedCity.state}, ${selectedCity.country}`;
   }
 
-  currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+  country.id = selectCityIndex;
   currentWeather.textContent = weatherData.currentWeather;
-
   changeBgImage(weatherData.currentWeather);
 }
 

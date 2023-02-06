@@ -14,16 +14,32 @@ async function fetchCityList(city) {
   }
 }
 
-async function fetchCityWeather(latitude, longitude) {
+async function fetchCityWeatherCelsius(latitude, longitude) {
   const cityWeatherResponse = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d9e258234d52a07f51639a2e63abcc0f`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d9e258234d52a07f51639a2e63abcc0f&units=metric`
   );
   const cityWeather = await cityWeatherResponse.json();
   const country = cityWeather.name;
-  const currentTemperature = unitConvert.kelvinToCelsius(cityWeather.main.temp);
+  const currentTemperature = cityWeather.main.temp;
 
   const currentWeather = cityWeather.weather[0].main;
   return { country, currentTemperature, currentWeather };
 }
 
-export default { fetchCityList, fetchCityWeather };
+async function fetchCityWeatherFahrenheit(latitude, longitude) {
+  const cityWeatherResponse = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d9e258234d52a07f51639a2e63abcc0f&units=imperial`
+  );
+  const cityWeather = await cityWeatherResponse.json();
+  const country = cityWeather.name;
+  const currentTemperature = cityWeather.main.temp;
+
+  const currentWeather = cityWeather.weather[0].main;
+  return { country, currentTemperature, currentWeather };
+}
+
+export default {
+  fetchCityList,
+  fetchCityWeatherCelsius,
+  fetchCityWeatherFahrenheit,
+};
