@@ -45,26 +45,28 @@ function changeBgImage(weather) {
   }
 }
 
-let searchList;
-let weatherData;
-let fahrenheitCheck = false;
 const unitCheck = document.getElementById('unit-check');
+let searchList;
+let fahrenheitCheck = false;
+let weatherData;
 
-function appendUnitConvert() {
+function appendUnitConvert(data) {
   if (fahrenheitCheck === false) {
     unitCheck.textContent = 'Change to °C';
     currentTemperature.textContent = `${unitConvert.celsiusToFahrenheit(
-      weatherData.currentTemperature
+      data.currentTemperature
     )} °F`;
     fahrenheitCheck = true;
   } else if (fahrenheitCheck === true) {
     unitCheck.textContent = 'Change to °F';
-    currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+    currentTemperature.textContent = `${data.currentTemperature} °C`;
     fahrenheitCheck = false;
   }
 }
 
-unitCheck.addEventListener('click', appendUnitConvert);
+unitCheck.addEventListener('click', () => {
+  appendUnitConvert(weatherData);
+});
 
 async function appendCityWeather(e) {
   unitCheck.style.visibility = 'visible';
@@ -72,12 +74,21 @@ async function appendCityWeather(e) {
   const selectedCity = searchList[selectCityIndex];
   const latitude = selectedCity.lat;
   const longitude = selectedCity.lon;
+
   if (fahrenheitCheck === true) {
-    weatherData = await fetch.fetchCityWeatherFahrenheit(latitude, longitude);
-    currentTemperature.textContent = `${weatherData.currentTemperature} °F`;
+    try {
+      weatherData = await fetch.fetchCityWeatherFahrenheit(latitude, longitude);
+      currentTemperature.textContent = `${weatherData.currentTemperature} °F`;
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    weatherData = await fetch.fetchCityWeatherCelsius(latitude, longitude);
-    currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+    try {
+      weatherData = await fetch.fetchCityWeatherCelsius(latitude, longitude);
+      currentTemperature.textContent = `${weatherData.currentTemperature} °C`;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (selectedCity.state === undefined) {
@@ -86,7 +97,6 @@ async function appendCityWeather(e) {
     country.textContent = `${selectedCity.name}, ${selectedCity.state}, ${selectedCity.country}`;
   }
 
-  country.id = selectCityIndex;
   currentWeather.textContent = weatherData.currentWeather;
   changeBgImage(weatherData.currentWeather);
 }
